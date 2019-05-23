@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Task_3
 {
-    class Checker
+    class Solver
     {
-        public bool InShadedArea(Point point)
+        bool inShadedArea;
+        public void InShadedArea(Point point)
         {
-            bool inShadedArea = false;
+            inShadedArea = false;
             if (InHalfCircle(point))
             {
                 if (!InEmptyQuarter(point))
@@ -18,7 +19,6 @@ namespace Task_3
                     inShadedArea = true;
                 }
             }
-            return inShadedArea;
         }
         private bool InHalfCircle(Point p)
         {
@@ -37,6 +37,10 @@ namespace Task_3
                 inEmptyQuarter = true;
             }
             return inEmptyQuarter;
+        }
+        public void OutputAnswer(IPrinter printer)
+        {
+            printer.Print(inShadedArea);
         }
     }
 }

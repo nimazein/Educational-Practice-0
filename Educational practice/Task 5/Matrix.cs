@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_5
 {
     class Matrix
-    {
-        private static Random rnd = new Random();
-        private static double[,] matrix;
-        private static double max;
+    {       
+        private double[,] matrix;
+        private double max;
 
-        public static void CreateMatrix()
+        public void CreateMatrix()
         {
             Console.Write("n = ");
             try
@@ -27,8 +22,9 @@ namespace Task_5
                 Console.WriteLine("Ошибка ввода");
             }
         }
-        public static void FillMatrixRandomly()
+        public void FillMatrixRandomly()
         {
+            Random rnd = new Random();
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
@@ -39,21 +35,21 @@ namespace Task_5
             }
         }
 
-        //public static void OutputMatrix()
-        //{
-        //    for (int i = 0; i < matrix.GetLength(0); i++)
-        //    {
-        //        Console.WriteLine();
-        //        for (int j = 0; j < matrix.GetLength(1); j++)
-        //        {
-        //            Console.Write("{0:#.##}" + " ", matrix[i, j]);
-        //        }
-        //    }
-        //    Console.WriteLine();
-        //    Console.WriteLine();
-        //    Console.WriteLine();
-        //}
-        public static void FindMaxNumber()
+        public void OutputMatrix()
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                Console.WriteLine();
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    Console.Write("{0:#.##}" + " ", matrix[i, j]);
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        public void FindMaxNumber()
         {
             max = matrix[0, 0];
 
@@ -68,9 +64,8 @@ namespace Task_5
                 }
             }
         }
-        public static void PrintMaxNumber()
+        public void PrintMaxNumber(IPrinter printer)
         {
-            ConsolePrinter printer = new ConsolePrinter();
             printer.Print(max);
         }
     }

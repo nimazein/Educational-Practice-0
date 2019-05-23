@@ -6,7 +6,7 @@ namespace Task_5
     {
         public void Print(double maxNumber)
         {
-            Console.WriteLine("{0:##}",maxNumber);
+            Console.WriteLine("{0:#.##}",maxNumber);
         }    
     }
 }

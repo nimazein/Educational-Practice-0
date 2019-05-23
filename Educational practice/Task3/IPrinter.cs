@@ -9,5 +9,6 @@ namespace Task_3
     interface IPrinter
     {
         void Print(bool b);
+        void Print(Point p);
     }
 }

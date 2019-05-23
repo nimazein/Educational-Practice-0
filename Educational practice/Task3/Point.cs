@@ -42,5 +42,10 @@ namespace Task_3
             X = coordinates[0];
             Y = coordinates[1];
         }
+        public void OutputCoordinates(IPrinter printer)
+        {
+            printer.Print(this);
+        }
+        
     }
 }

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_3
 {
@@ -11,13 +7,14 @@ namespace Task_3
         static void Main(string[] args)
         {
             PointCreator pointCreator = new PointCreator();
-            Checker checker = new Checker();
+            Solver solver = new Solver();
             ConsolePrinter printer = new ConsolePrinter();
 
             Point point = pointCreator.CreatePoint();
-            printer.Print(point);
-            printer.Print(checker.InShadedArea(point));
+            point.OutputCoordinates(printer);
 
+            solver.InShadedArea(point);
+            solver.OutputAnswer(printer);         
         }
     }
 }

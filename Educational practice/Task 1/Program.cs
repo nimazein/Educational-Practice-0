@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_1
 {
@@ -72,7 +68,7 @@ namespace Task_1
             int numberOfIngredients = masses.Length;
             int percentagesSum = 0;
 
-            for (int i = 0;i < percentages.Length; i++)
+            for (int i = 0; i < percentages.Length; i++)
             {
                 percentages[i] = Math.Floor(percentages[i]);
             }
@@ -110,7 +106,7 @@ namespace Task_1
 
                 if (percentagesSum < 100)
                 {
-                    percentages[i]++;              
+                    percentages[i]++;
                 }
             }
         }
@@ -121,7 +117,7 @@ namespace Task_1
             {
                 foreach (int percentage in percentages)
                 {
-                     file.WriteLine(percentage.ToString());
+                    file.WriteLine(percentage.ToString());
                 }
             }
         }
