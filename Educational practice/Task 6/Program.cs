@@ -32,7 +32,7 @@ namespace Task_6
             catch (Exception)
             {
                 Console.WriteLine("Переполнение памяти");
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
                 Environment.Exit(0);
             }   
             InputN();
@@ -109,8 +109,6 @@ namespace Task_6
             {
                 Console.Write(el + " ");
             }
-
-
         }
     }
 }
