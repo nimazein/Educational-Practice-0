@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Task_6
 {
@@ -11,34 +12,41 @@ namespace Task_6
         static int M;
         static int N;
         static List<double> a = new List<double>();
-        static double[] multiplesOf3 = new double[M];
+        static double[] multiplesOf3;
         static bool foundAllThreeMultiples = false;
 
         static void Main(string[] args)
         {
             Input();
             Solve();
-            
-           
-
-            
+            Console.ReadKey();          
         }
         private static void Input()
         {
             InputA();
             InputM();
+            try
+            {
+                multiplesOf3 = new double[M];
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Переполнение памяти");
+                Thread.Sleep(3000);
+                Environment.Exit(0);
+            }   
             InputN();
 
             void InputA()
             {
                 Console.Write("a1 = ");
-                a.Add(Convert.ToInt32(Console.ReadLine()));
+                a.Add(Convert.ToDouble(Console.ReadLine()));
 
                 Console.Write("a2 = ");
-                a.Add(Convert.ToInt32(Console.ReadLine()));
+                a.Add(Convert.ToDouble(Console.ReadLine()));
 
                 Console.Write("a3 = ");
-                a.Add(Convert.ToInt32(Console.ReadLine()));
+                a.Add(Convert.ToDouble(Console.ReadLine()));
             }
             void InputM()
             {
@@ -51,7 +59,7 @@ namespace Task_6
                 N = Convert.ToInt32(Console.ReadLine());
             }
         }
-        private void Solve()
+        private static void Solve()
         {
             int m = 0;
             for (int i = 3; i < N; i++)
@@ -91,6 +99,7 @@ namespace Task_6
             }
             else
             {
+                Console.WriteLine("Найдены первые N членов");
                 OutputSeries();
             }
         }
@@ -98,8 +107,10 @@ namespace Task_6
         {
             foreach (double el in a)
             {
-                Console.Write(a + " ");
+                Console.Write(el + " ");
             }
+
+
         }
     }
 }
