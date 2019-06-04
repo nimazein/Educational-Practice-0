@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 
 namespace Task_7
 {
     class Program
     {
-        static BinaryTree tree = new BinaryTree();
-        static List<double> frequencies = new List<double>(1);
+        static List<double> frequencies = new List<double>();
         static List<Node> nodes = new List<Node>();
         static Dictionary<string, double> codes = new Dictionary<string, double>();
         static void Main(string[] args)
@@ -16,9 +14,8 @@ namespace Task_7
             InputFrequencies();
             FillNodes();
             FillCodes();
-            PrintCodesAndFrequencies(nodes[nodes.Count - 1]);
+            PrintCodesAndFrequencies();
             Console.ReadKey();
-
         }
         private static void InputFrequencies()
         {
@@ -74,16 +71,13 @@ namespace Task_7
                 frequencies.Sort();
             }          
         }
-
         private static void FillCodes()
         {
             Node root = nodes[nodes.Count - 1];
             string  cod = "0";
             AddCode(root, ref cod);
-
         }
        
-
         private static void AddCode(Node node, ref string cod)
         {
             if (node != null)
@@ -97,23 +91,27 @@ namespace Task_7
                 AddCode(node.Left, ref cod);
                 cod = "1";
                 AddCode(node.Right, ref cod);
-                
-
-
-
             }
         }
-        private static void PrintCodesAndFrequencies(Node node)
+        private static void PrintCodesAndFrequencies()
+        {
+            PrintRecursively(nodes[nodes.Count - 1]);
+        }
+        private static void PrintRecursively(Node node)
         {
             if (node != null)
             {
-                PrintCodesAndFrequencies(node.Left);
-                string reversedCode = ReverseCode(node);
-                if (reversedCode != null)
-                    Console.WriteLine(reversedCode + " => " + node.Frequency);
-                PrintCodesAndFrequencies(node.Right);
+                PrintRecursively(node.Left);
+                if (node.Left == null && node.Right == null)
+                {
+                    string reversedCode = ReverseCode(node);
+                    if (reversedCode != null)
+                        Console.WriteLine(reversedCode + " => " + node.Frequency);
+                }
+                
+                PrintRecursively(node.Right);
             }
-        }
+        }     
         private static string ReverseCode(Node node)
         {
             if (node.Code != null)
@@ -122,10 +120,7 @@ namespace Task_7
                 Array.Reverse(array);
                 return new string(array);
             }
-            return null;
-            
+            return null;           
         }
-
-
     }
 }
