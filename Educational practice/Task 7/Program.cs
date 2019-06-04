@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Task_7
 {
     class Program
     {
-        static List<double> frequencies = new List<double>();
-        static StringBuilder code = new StringBuilder();
-        static Dictionary<string, string> codes = new Dictionary<string, string>();
+        static BinaryTree tree = new BinaryTree();
+        static List<double> frequencies = new List<double>(1);
+        static List<Node> nodes = new List<Node>();
+        static Dictionary<string, double> codes = new Dictionary<string, double>();
         static void Main(string[] args)
         {
             InputFrequencies();
-            G();
-            OutputInfo();
+            FillNodes();
+            FillCodes();
+            PrintCodesAndFrequencies(nodes[nodes.Count - 1]);
+            Console.ReadKey();
+
         }
         private static void InputFrequencies()
         {
@@ -25,60 +30,102 @@ namespace Task_7
             frequencies.Add(0.3);
             frequencies.Sort();
         }
-        private static void G()
+        private static void FillNodes()
         {
             while (frequencies.Count != 1)
             {
                 Node smallest = new Node(frequencies[0]);
                 Node semiSmallest = new Node(frequencies[1]);
 
+                foreach (var el in nodes)
+                {
+                    if (el.Frequency == frequencies[0])
+                    {
+                        smallest = el;
+                        break;
+                    }
+                    else
+                    {
+                        smallest = new Node(frequencies[0]);
+                    }
+                }
+                foreach (var el in nodes)
+                {
+                    if (el.Frequency == frequencies[1])
+                    {
+                        semiSmallest = el;
+                        break;
+                    }
+                    else
+                    {
+                        semiSmallest = new Node(frequencies[1]);
+                    }
+                }
                 Node node = new Node(smallest, semiSmallest);
 
-                frequencies.Remove(0);
-                frequencies.Remove(1);
+                smallest.Parent = node;
+                semiSmallest.Parent = node;
+
+                frequencies.RemoveAt(1);
+                frequencies.RemoveAt(0);
+                frequencies.Add(node.Frequency);
+                nodes.Add(node);
 
                 frequencies.Sort();
-            }
-            Node root = new Node(frequencies[0]);
-            Code(root);
+            }          
         }
-        private static void Code(Node root)
+
+        private static void FillCodes()
         {
-            if (root.Left != null)
-            {
-                code.Append(0);
-                Code(root.Left);
-            }
+            Node root = nodes[nodes.Count - 1];
+            string  cod = "0";
+            AddCode(root, ref cod);
 
-            if (root.Right != null)
-            {
-                code.Append(1);
-                Code(root.Right);
-            }
+        }
+       
 
-            if (root.Left == null && root.Right == null)
-            {
-                if (code.Length == 0)
+        private static void AddCode(Node node, ref string cod)
+        {
+            if (node != null)
+            {              
+                if (node.Parent != null && node.Code == null)
                 {
-                    code.Append(0);
-                }
-                codes.Add(root.Key, code.ToString());
-            }
-            try
-            {
-                code.Remove(code.Length - 1, 1);
-            }
-            catch (Exception)
-            {
+                    node.Code = cod;
+                    node.Code += node.Parent.Code;
+                }      
+                cod = "0";
+                AddCode(node.Left, ref cod);
+                cod = "1";
+                AddCode(node.Right, ref cod);
+                
+
+
 
             }
         }
-        private static void OutputInfo()
+        private static void PrintCodesAndFrequencies(Node node)
         {
-            foreach(var el in codes)
+            if (node != null)
             {
-                Console.WriteLine(el.Value);
+                PrintCodesAndFrequencies(node.Left);
+                string reversedCode = ReverseCode(node);
+                if (reversedCode != null)
+                    Console.WriteLine(reversedCode + " => " + node.Frequency);
+                PrintCodesAndFrequencies(node.Right);
             }
         }
+        private static string ReverseCode(Node node)
+        {
+            if (node.Code != null)
+            {
+                char[] array = node.Code.ToCharArray();
+                Array.Reverse(array);
+                return new string(array);
+            }
+            return null;
+            
+        }
+
+
     }
 }

@@ -10,20 +10,24 @@ namespace Task_7
     {
         public Node Left { get; set; }
         public Node Right { get; set; }
+        public Node Parent { get; set; }
 
-        public string Key { get; set; }
-        public double Frequency { get; set; }
+        public string Code { get; set; }
+        public double Frequency { get; }
         public Node(double frequency)
         {
+            Parent = null;
             Left = null;
             Right = null;
             Frequency = frequency;
+            Code = null;
         }
 
         public Node(Node left, Node right)
         {
             Left = left;
             Right = right;
+            Code = null;
             Frequency = left.Frequency + right.Frequency;
         }
     }
