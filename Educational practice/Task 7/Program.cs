@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 
 namespace Task_7
@@ -19,16 +20,27 @@ namespace Task_7
         }
         private static void InputFrequencies()
         {
-            frequencies.Add(0.08);
-            frequencies.Add(0.12);
-            frequencies.Add(0.1);
+            
             frequencies.Add(0.25);
-            frequencies.Add(0.15);
-            frequencies.Add(0.3);
+            frequencies.Add(0.25);
+            frequencies.Add(0.25);
+            frequencies.Add(0.25);
+
+
+            if (frequencies.Count == 1)
+            {
+                if (frequencies[0] == 1)
+                {
+                    Console.WriteLine("0 => 1");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+            }
             frequencies.Sort();
         }
         private static void FillNodes()
         {
+            
             while (frequencies.Count != 1)
             {
                 Node smallest = new Node(frequencies[0]);

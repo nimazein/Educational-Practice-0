@@ -14,6 +14,14 @@ namespace Task_7
 
         public string Code { get; set; }
         public double Frequency { get; }
+        public Node()
+        {
+            Parent = null;
+            Left = null;
+            Right = null;
+            Frequency = 1;
+            Code = null;
+        }
         public Node(double frequency)
         {
             Parent = null;
