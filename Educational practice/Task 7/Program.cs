@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 
 namespace Task_7
@@ -20,7 +19,7 @@ namespace Task_7
         }
         private static void InputFrequencies()
         {
-            
+
             frequencies.Add(0.25);
             frequencies.Add(0.25);
             frequencies.Add(0.25);
@@ -40,7 +39,7 @@ namespace Task_7
         }
         private static void FillNodes()
         {
-            
+
             while (frequencies.Count != 1)
             {
                 Node smallest = new Node(frequencies[0]);
@@ -81,24 +80,24 @@ namespace Task_7
                 nodes.Add(node);
 
                 frequencies.Sort();
-            }          
+            }
         }
         private static void FillCodes()
         {
             Node root = nodes[nodes.Count - 1];
-            string  cod = "0";
+            string cod = "0";
             AddCode(root, ref cod);
         }
-       
+
         private static void AddCode(Node node, ref string cod)
         {
             if (node != null)
-            {              
+            {
                 if (node.Parent != null && node.Code == null)
                 {
                     node.Code = cod;
                     node.Code += node.Parent.Code;
-                }      
+                }
                 cod = "0";
                 AddCode(node.Left, ref cod);
                 cod = "1";
@@ -120,10 +119,10 @@ namespace Task_7
                     if (reversedCode != null)
                         Console.WriteLine(reversedCode + " => " + node.Frequency);
                 }
-                
+
                 PrintRecursively(node.Right);
             }
-        }     
+        }
         private static string ReverseCode(Node node)
         {
             if (node.Code != null)
@@ -132,7 +131,7 @@ namespace Task_7
                 Array.Reverse(array);
                 return new string(array);
             }
-            return null;           
+            return null;
         }
     }
 }
