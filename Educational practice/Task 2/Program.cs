@@ -6,96 +6,61 @@ namespace Task_2
 {
     class Program
     {
-        static int n;
-        static StreamWriter writer;
-        static List<List<string>> answer;
+
+        static string[] multipliers = new string[] { "", "D", "T" };
+        static List<string> answer = new List<string>();
         static void Main(string[] args)
         {
-            GetN();
-            initializeList();
-            GetStreamWriter();
-            Solve();
-            CloseStreams();
-
-        }
-        private static void GetN()
-        {
-            FileStream input = new FileStream("input.txt", FileMode.Open);
+            FileStream input = new FileStream("INPUT.txt", FileMode.Open);
             StreamReader reader = new StreamReader(input);
 
             string inputStr = reader.ReadToEnd();
-            n = Convert.ToInt32(inputStr);
+            int n = Convert.ToInt32(inputStr);
             reader.Close();
             input.Close();
-        }
-        private static void GetStreamWriter()
-        {
-            FileStream output = new FileStream("output.txt", FileMode.OpenOrCreate);
-            writer = new StreamWriter(output);
-        }
-        private static void initializeList()
-        {
-            answer = new List<List<string>>();
 
-            for (int i = 0; i < 10; i++)
-            {
-                answer.Add(new List<string>());
-            }
-        }
-        private static void Solve()
-        {
-            if (n > 170)
-            {
-                writer.WriteLine("Невозможно");
-                return;
-            }
-            else if (n == 170)
-            {
-                writer.Write("T20 T20 Bull");
-                return;
-            }
-            else
-            {
-                while (n > 61)
-                {
-                    n -= 60;
-                    answer[0].Add("T20");
-                }
+            Solve(0, n, "");
 
-                if (n <= 40)
-                {
-                    if (n % 2 == 0)
-                    {
-                        ("D" + n / 2 + "\n");
-                    }
-                    else
-                    {
-                        output.Append(1 + "\n");
-                        n -= 1;
-                        output.Append("D" + n / 2 + "\n");
-                    }
-                }
-                else
-                {
-                    output.Append(n - 40 + "\n");
-                    n = 40;
-                    output.Append("D" + n / 2 + "\n");
-                }
+            FileStream output = new FileStream("OUTPUT.txt", FileMode.OpenOrCreate);
+            StreamWriter writer = new StreamWriter(output);
 
-            }
-
-            for (int i = 0; i < answer.Count; i++)
+            writer.WriteLine(answer.Count);
+            foreach (string el in answer)
             {
-                for (int j = 0; j < answer[i].Count; j++)
-                {
-                    writer.Write(answer[i][j] + " ");
-                }
-                writer.WriteLine("");
+                writer.WriteLine(el);
             }
-        }
-        private static void CloseStreams()
-        {
             writer.Close();
+            output.Close();
+        }  
+        static void Solve(int x, int left, string current)
+        {
+            if (left == 0)
+            {
+                answer.Add(current);
+            }
+            if (x == 3)
+            {
+                return;
+            }
+            for (int i = 1; i <= 20; i++)
+            {
+                for (int j = 1; j <= 3; j++)
+                {
+                    if (i * j < left || (i * j == left && j == 2))
+                    {                       
+                        Solve(x + 1, left - i * j, current + multipliers[j-1] + i + " ");
+                    }
+                }
+            }
+
+            if (left > 25)
+            {
+                Solve(x + 1, left - 25, current + "25 ");
+            }
+            if (left > 25)
+            {
+                Solve(x + 1, left - 50, current + "Bull ");
+            }
         }
     }
 }
