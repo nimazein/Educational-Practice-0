@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace Task_12
 {
     class PyramidSorting
-    {
-        //add 1 element to the pyramid
+    {     
         private int counter;
         public int Counter
         {
@@ -17,7 +16,7 @@ namespace Task_12
                 return counter;
             }
         }
-        int AddToPyramid(int[] array, int i, int N)
+        int AddToTree(int[] array, int i, int N)
         {
             int max;
             int temp;
@@ -65,17 +64,17 @@ namespace Task_12
         }
         public void Sort(int[] array, int size)
         {
-            //step 1: building the pyramid
+            // Заполнить дерево
             for (int i = size / 2 - 1; i >= 0; i--)
             {
                 long prev = i;
-                i = AddToPyramid(array, i, size);
+                i = AddToTree(array, i, size);
 
                 if (prev != i)
                     i++;
             }
 
-            //step 2: sorting
+            // Сортировка
             int temp;
             for (int k = size - 1; k > 0; k--)
             {
@@ -90,7 +89,7 @@ namespace Task_12
                 {
                     
                     prev = i;
-                    i = AddToPyramid(array, i, k);
+                    i = AddToTree(array, i, k);
                 }
             }
         }

@@ -23,10 +23,7 @@ namespace Task_12
             get;
             set;
         }
-        public Result()
-        {
-
-        }
+        public Result() { }
         public Result(string sortings, string arrayType, int comparisons)
         {
             SortingType = sortings;
@@ -35,7 +32,7 @@ namespace Task_12
         }
         public override string ToString()
         {
-            return null;
+            return $"{SortingType}, {ArrayType}, {NumberOfComparisons} сравнений";
         }
     }
 }

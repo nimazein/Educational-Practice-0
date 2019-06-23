@@ -8,7 +8,7 @@ namespace Task_12
 {
     class Program
     {
-        static int N;
+        static int size;
         static int[] array;
         static Random rnd = new Random();
 
@@ -21,26 +21,26 @@ namespace Task_12
             FillArray();
             ReadKeyAndClear();
 
-            Console.WriteLine("Пирамидная сортировка");
+            Console.WriteLine("Пирамидальная сортировка");
             SortPyramidly();
             ReadKeyAndClear();
 
             Console.WriteLine("Сортировка подсчетом");
             SortByCounting();
             ReadKeyAndClear();
-            // Можно добавить вывод
+            OutputResult();
             Console.ReadKey();
 
         }
-       static void FillArray()
-        {           
-            Console.Write("Введите N: ");
-            N = Convert.ToInt32(Console.ReadLine());
+        static void FillArray()
+        {
+            Console.Write("Введите размер: ");
+            size = Convert.ToInt32(Console.ReadLine());
 
-            array = new int[N];
+            array = new int[size];
 
             int firstIndex = 0;
-            if (N > 3)
+            if (size > 3)
             {
                 array[0] = rnd.Next(-100, 0);
                 array[1] = rnd.Next(1, 10);
@@ -55,7 +55,7 @@ namespace Task_12
         }
         static void FillRandomly(int firstIndex)
         {
-            for (int i = firstIndex; i < N; i++)
+            for (int i = firstIndex; i < size; i++)
             {
                 array[i] = rnd.Next(-100, 100);
             }
@@ -83,15 +83,15 @@ namespace Task_12
             PrintArray();
 
             PyramidSorting pyramidSorting = new PyramidSorting();
-            pyramidSorting.Sort(array, N);
+            pyramidSorting.Sort(array, size);
 
             Console.WriteLine("Сортированный массив");
             PrintArray();
             Console.WriteLine($"Сравнений: {pyramidSorting.Counter}");
 
-            SaveResult("Пирамидальная сортировка", "Несортированный масссив", pyramidSorting.Counter);
+            SaveResult("Пирамидальная сортировка", "Несортированный массив", pyramidSorting.Counter);
 
-                       
+
         }
         static void SortAscendingPyramidly()
         {
@@ -100,11 +100,11 @@ namespace Task_12
             Console.WriteLine("Уже сортированный по возрастанию массив");
             PrintArray();
 
-            pyramidSorting.Sort(array, N);
+            pyramidSorting.Sort(array, size);
             Console.WriteLine("Массив был снова отсортирован");
             Console.WriteLine($"Сравнений: {pyramidSorting.Counter}");
 
-            SaveResult("Пирамидальная сортировка", "Сортированный по возрастанию масссив", pyramidSorting.Counter);
+            SaveResult("Пирамидальная сортировка", "Сортированный по возрастанию массив", pyramidSorting.Counter);
         }
         static void SortDescendingPyramidly()
         {
@@ -115,18 +115,18 @@ namespace Task_12
             PrintArray();
 
             Console.WriteLine("Массив после сортировки");
-            pyramidSorting.Sort(array, N);
+            pyramidSorting.Sort(array, size);
             PrintArray();
             Console.WriteLine($"Сравнений: {pyramidSorting.Counter}");
 
-            SaveResult("Пирамидальная сортировка", "Сортированный по убыванию масссив", pyramidSorting.Counter);
+            SaveResult("Пирамидальная сортировка", "Сортированный по убыванию массив", pyramidSorting.Counter);
         }
 
-       
+
 
         //Counting sorting
         static void SortByCounting()
-        {            
+        {
             FIllArrayWithSmallNumbers();
             SortUnsortedByCounting();
             ReadKeyAndClear();
@@ -137,8 +137,8 @@ namespace Task_12
         }
         static void FIllArrayWithSmallNumbers()
         {
-            array = new int[N];
-            for (int i = 0; i < N; i++)
+            array = new int[size];
+            for (int i = 0; i < size; i++)
             {
                 array[i] = rnd.Next(1, 5);
             }
@@ -174,7 +174,7 @@ namespace Task_12
         static void SortDescendingByCounting()
         {
             CountSort countSort = new CountSort();
-            
+
             Console.WriteLine("Уже cортированный по убыванию массив");
             PrintArray();
 
@@ -183,7 +183,14 @@ namespace Task_12
             Console.WriteLine($"Сравнений: {countSort.Counter}");
             SaveResult("Сортировка подсчетом", "Cортированный по убыванию массив", countSort.Counter);
         }
-
+        static void OutputResult()
+        {
+            Console.WriteLine($"Размер массива: {size}");
+            foreach (var el in results)
+            {
+                Console.WriteLine(el.ToString());
+            }
+        }
         // Supporting Methods
         static void PrintArray()
         {

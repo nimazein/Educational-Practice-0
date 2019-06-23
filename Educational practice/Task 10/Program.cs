@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task_10
 {
@@ -11,6 +8,8 @@ namespace Task_10
         static double[] x;
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             FillXes();
             Count();
 
@@ -18,34 +17,46 @@ namespace Task_10
         }
         static void FillXes()
         {
-            int size = 6;
+            uint size;
+            bool ok = false;
+            do
+            {
+                Console.Write("n = ");
+                string buf = Console.ReadLine();
+                ok = UInt32.TryParse(buf, out size);
+                if (!ok)
+                    Console.WriteLine("Неверный ввод n");
+
+                if (size == 0)
+                {
+                    Console.WriteLine("Невозможно вычислить значение выражения");
+                    ok = false;
+                }                 
+            } while (!ok);
+
             x = new double[size];
-
-            Random rnd = new Random();
-
-            for (int i = 0;i <size; i++)
-            {
-                x[i] = rnd.NextDouble() * rnd.Next(-100, 100);
-
-
-            }
-
-            foreach (double n in x)
-            {
-                Console.WriteLine(n);
+            for (int i = 0; i < size; i++)
+            {                       
+                do
+                {
+                    Console.Write($"x{i + 1} = ");
+                    string buf = Console.ReadLine();
+                    ok = Double.TryParse(buf, out x[i]);
+                    if (!ok)
+                        Console.WriteLine("Неверный ввод x");  
+                    
+                } while (!ok);
             }
             Console.WriteLine();
-
-
         }
         static void Count()
         {
-            double answer = 0;
-            for (int i =0; i < x.Length; i++)
+            double answer = 1;
+            for (int i = 0; i < x.Length; i++)
             {
-                answer += (x[i] + x[x.Length - 1 - i]);
+                answer *= (x[i] + x[x.Length - 1 - i]);
             }
-            Console.WriteLine(answer);
+            Console.WriteLine($"Значение выражения: {answer}");
         }
     }
 }

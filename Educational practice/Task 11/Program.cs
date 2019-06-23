@@ -12,14 +12,14 @@ namespace Task_11
          
              Кодируются английские заглавные и строчные буквы, пробел и знаки препинания.
              Каждый из символов кодируется двоичным числом длиной в 7 символов.
-             Кодирование происходит всеми числами двоичной системы, начиная с 000000 
-             и заканчивая 111111, кодируемые символы расположены в порядке:
+             Кодирование происходит всеми числами двоичной системы, начиная с 0000000
+             и заканчивая 1хххххх, кодируемые символы расположены в порядке:
              1) Заглавные буквы
              2) Строчные буквы
              3) Цифры
              4) Пробел
              
-             Пример: Символ 'А' кодируется числом 000000, 'D' - 000011
+             Пример: Символ 'А' кодируется числом 0000000, 'D' - 0000011
          */
 
         static string text;
@@ -34,6 +34,7 @@ namespace Task_11
             string codedText = CodeText();
             Console.ReadKey();
 
+            Console.WriteLine();
             Console.WriteLine("Раскодированный текст: ");
             DecodeString(codedText);
             Console.ReadKey();
@@ -74,18 +75,9 @@ Like a diamond in the sky.";
 
             foreach (string codeWord in codeWords)
             {
-                try
-                {
-                    int idx = dictionary.Codes.IndexOf(codeWord);
-                    uncoded.Append(dictionary.Symbols[idx]);
-                }
-                catch
-                {
-                    Console.WriteLine("GG");
-                }
-                
+                int idx = dictionary.Codes.IndexOf(codeWord);
+                uncoded.Append(dictionary.Symbols[idx]);
             }
-
             Console.WriteLine(uncoded);
         }
     }

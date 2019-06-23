@@ -9,6 +9,7 @@ namespace Task_1
         static int[] masses;
         static char[] signs;
         static double[] percentages;
+        static int[] newPercentages;
 
         static void Main(string[] args)
         {
@@ -65,49 +66,45 @@ namespace Task_1
         }
         private static void RoundPercentages()
         {
-            int numberOfIngredients = masses.Length;
-            int percentagesSum = 0;
-
-            for (int i = 0; i < percentages.Length; i++)
+            newPercentages = new int[masses.Length];
+            // Using Math rules
+            for (int i =0; i < masses.Length; i++)
             {
-                percentages[i] = Math.Floor(percentages[i]);
+                if (signs[i] == '+')
+                {
+                    newPercentages[i] = Convert.ToInt32(Math.Ceiling(percentages[i]));
+                }
+                else
+                {   
+                    newPercentages[i] = Convert.ToInt32(Math.Floor(percentages[i]));
+                }
             }
 
-            for (int i = 0; i < numberOfIngredients; i++)
+            // To meet conditions
+            int sum = CountSum(); 
+            int k = 0;
+            while (sum != 100)
             {
-                if (percentagesSum == 100)
-                    break;
+                if (k == percentages.Length)
+                    k = 0;
 
-                percentagesSum = 0;
-                foreach (int percentage in percentages)
+                if (sum > 100)
                 {
-                    percentagesSum += percentage;
-                }
-
-                if (percentagesSum < 100)
-                {
-                    if (signs[i] == '+')
+                    if (signs[k] == '+')
                     {
-                        percentages[i] = Convert.ToInt32(Math.Ceiling(percentages[i]));
+                        newPercentages[k]--;
                     }
                 }
-            }
-
-            for (int i = 1; i < numberOfIngredients; i++)
-            {
-                if (percentagesSum == 100)
-                    break;
-
-                percentagesSum = 0;
-                foreach (int percentage in percentages)
+                else
                 {
-                    percentagesSum += percentage;
+                    if (signs[k] == '-')
+                    {
+                        newPercentages[k]++;
+                    }
                 }
 
-                if (percentagesSum < 100)
-                {
-                    percentages[i]++;
-                }
+                sum = CountSum();
+                k++;
             }
         }
         private static void OutputAnswer()
@@ -115,11 +112,20 @@ namespace Task_1
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter("OUTPUT.txt"))
             {
-                foreach (int percentage in percentages)
+                foreach (int percentage in newPercentages)
                 {
                     file.WriteLine(percentage.ToString());
                 }
             }
+        }
+        private static int CountSum()
+        {
+            int sum = 0;
+            foreach (int el in newPercentages)
+            {
+                sum += el;
+            }
+            return sum;
         }
     }
 }

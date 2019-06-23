@@ -12,7 +12,6 @@ namespace Task_9
         Node tail;
 
         int count;
-
         public int Count
         {
             get
@@ -66,9 +65,7 @@ namespace Task_9
                     if (current.Next != null)
                         current = current.Next;
                 } while (current != head);
-            }
-            
-
+            }         
         }
         public void PositiveSum()
         {
@@ -76,11 +73,11 @@ namespace Task_9
             {
                 if (head.Data >= 0)
                 {
-                    OutputSum("Positive", head.Data);
+                    OutputSum("Положительная", head.Data);
                 }
                 else
                 {
-                    Console.WriteLine("no positive");
+                    Console.WriteLine("В списке нет положительных элементов");
                 }
             }
             else
@@ -97,7 +94,7 @@ namespace Task_9
                         current = current.Next;
                 } while (current != head);
 
-                OutputSum("Positive", positiveSum);
+                OutputSum("Положительная", positiveSum);
             }
         }
         public void NegativeSum()
@@ -106,11 +103,11 @@ namespace Task_9
             {
                 if (head.Data < 0)
                 {
-                    OutputSum("Negative", head.Data);
+                    OutputSum("Отрицательная", head.Data);
                 }
                 else
                 {
-                    Console.WriteLine("no negative");
+                    Console.WriteLine("В списке нет отрицательных элементов");
                 }
             }
             else
@@ -127,17 +124,20 @@ namespace Task_9
                         current = current.Next;
                 } while (current != head);
 
-                OutputSum("Negative", negativeSum);
+                if (negativeSum == 0)
+                {
+                    Console.WriteLine("В списке нет отрицательных элементов");
+                }
+                else
+                {
+                    OutputSum("Отрицательная", negativeSum);
+                }
+                
             }
         }
         public void OutputSum(string type, int sum)
         {
-            Console.WriteLine($"{type} sum: {sum}");
+            Console.WriteLine($"{type} сумма: {sum}");
         }
-
-
-        
-
-        
     }
 }

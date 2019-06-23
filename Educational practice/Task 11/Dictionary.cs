@@ -16,8 +16,7 @@ namespace Task_11
             get
             {
                 return symbols;
-            }
-                
+            }             
         }
         public List<string> Codes
         {
@@ -25,14 +24,8 @@ namespace Task_11
             {
                 return codes;
             }
-
-
         }
-        public Dictionary()
-        {
-
-        }
-        
+        public Dictionary() { }       
         public void FillDictionary()
         {
             // A-Z
@@ -59,8 +52,6 @@ namespace Task_11
                 symbols.Add(i.ToString());
             }
 
-           
-
             codes.Add(ToBinary(62));
             symbols.Add(".");
 
@@ -84,7 +75,6 @@ namespace Task_11
 
             codes.Add(ToBinary(69));
             symbols.Add(" ");
-
         }
         public string ToBinary(int num)
         {
@@ -98,9 +88,6 @@ namespace Task_11
             }
 
             return fullCode.ToString();
-
         }
-
-
     }
 }
