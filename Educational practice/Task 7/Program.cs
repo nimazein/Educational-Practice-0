@@ -19,12 +19,11 @@ namespace Task_7
         }
         private static void InputFrequencies()
         {
-
-            frequencies.Add(0.25);
-            frequencies.Add(0.25);
-            frequencies.Add(0.25);
-            frequencies.Add(0.25);
-
+            frequencies.Add(0.31);
+            frequencies.Add(0.26);
+            frequencies.Add(0.24);
+            frequencies.Add(0.18);
+            frequencies.Add(0.01);
 
             if (frequencies.Count == 1)
             {
@@ -88,22 +87,22 @@ namespace Task_7
             string cod = "0";
             AddCode(root, ref cod);
         }
-
-        private static void AddCode(Node node, ref string cod)
+        private static void AddCode(Node node, ref string code)
         {
             if (node != null)
             {
                 if (node.Parent != null && node.Code == null)
                 {
-                    node.Code = cod;
+                    node.Code = code;
                     node.Code += node.Parent.Code;
                 }
-                cod = "0";
-                AddCode(node.Left, ref cod);
-                cod = "1";
-                AddCode(node.Right, ref cod);
+                code = "0";
+                AddCode(node.Left, ref code);
+                code = "1";
+                AddCode(node.Right, ref code);
             }
         }
+
         private static void PrintCodesAndFrequencies()
         {
             PrintRecursively(nodes[nodes.Count - 1]);

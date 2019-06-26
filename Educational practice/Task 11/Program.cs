@@ -42,7 +42,8 @@ namespace Task_11
         }
         static void ReadText()
         {
-            text = @"Twinkle, twinkle, little star,
+            text = 
+@"Twinkle x2 little star,
 How I wonder what you are.
 Up above the world so high,
 Like a diamond in the sky.";
@@ -69,16 +70,17 @@ Like a diamond in the sky.";
         }
         static void DecodeString(string codedText)
         {
-            string[] codeWords = codedText.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries);
+            string[] codeWords = codedText.Split(new char[]{' '}, 
+                StringSplitOptions.RemoveEmptyEntries);
 
-            StringBuilder uncoded = new StringBuilder("");
+            StringBuilder decoded = new StringBuilder("");
 
             foreach (string codeWord in codeWords)
             {
                 int idx = dictionary.Codes.IndexOf(codeWord);
-                uncoded.Append(dictionary.Symbols[idx]);
+                decoded.Append(dictionary.Symbols[idx]);
             }
-            Console.WriteLine(uncoded);
+            Console.WriteLine(decoded);
         }
     }
 }

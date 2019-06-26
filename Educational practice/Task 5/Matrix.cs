@@ -30,6 +30,10 @@ namespace Task_5
         {
             printer.Print(matrix);
         }
+        public void PrintMaxNumber(IPrinter printer)
+        {
+            printer.Print(max);
+        }
         public void FindMaxNumber()
         {
             max = matrix[0, 0];
@@ -45,9 +49,6 @@ namespace Task_5
                 }
             }
         }
-        public void PrintMaxNumber(IPrinter printer)
-        {
-            printer.Print(max);
-        }
+        
     }
 }

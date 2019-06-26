@@ -86,7 +86,6 @@ namespace Task_11
             {
                 fullCode.Insert(0, "0");
             }
-
             return fullCode.ToString();
         }
     }

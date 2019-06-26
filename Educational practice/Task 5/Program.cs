@@ -10,8 +10,16 @@
             matrix.CreateMatrix(reader);
             matrix.FillMatrixRandomly();
             matrix.OutputMatrix(printer);
+
             matrix.FindMaxNumber();         
             matrix.PrintMaxNumber(printer);
         }
     }
 }
+
+
+
+
+
+
+
