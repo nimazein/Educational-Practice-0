@@ -2,15 +2,15 @@
 {
     class Program
     {
+        static Matrix matrix = new Matrix();
+        static ConsoleReader reader = new ConsoleReader();
+        static ConsolePrinter printer = new ConsolePrinter();
         static void Main(string[] args)
-        {
-            Matrix matrix = new Matrix();
-            matrix.CreateMatrix();
+        {          
+            matrix.CreateMatrix(reader);
             matrix.FillMatrixRandomly();
-            matrix.OutputMatrix();
-            matrix.FindMaxNumber();
-
-            ConsolePrinter printer = new ConsolePrinter();
+            matrix.OutputMatrix(printer);
+            matrix.FindMaxNumber();         
             matrix.PrintMaxNumber(printer);
         }
     }

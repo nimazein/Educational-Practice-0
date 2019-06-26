@@ -7,20 +7,11 @@ namespace Task_5
         private double[,] matrix;
         private double max;
 
-        public void CreateMatrix()
+        public void CreateMatrix(IReader reader)
         {
-            Console.Write("n = ");
-            try
-            {
-                int n = Convert.ToInt32(Console.ReadLine());
-
-                matrix = new double[n, n];
-                FillMatrixRandomly();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Ошибка ввода");
-            }
+            int n = reader.ReadN();
+            matrix = new double[n, n];
+            FillMatrixRandomly();
         }
         public void FillMatrixRandomly()
         {
@@ -35,19 +26,9 @@ namespace Task_5
             }
         }
 
-        public void OutputMatrix()
+        public void OutputMatrix(IPrinter printer)
         {
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                Console.WriteLine();
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    Console.Write("{0:#.##}" + " ", matrix[i, j]);
-                }
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
+            printer.Print(matrix);
         }
         public void FindMaxNumber()
         {
